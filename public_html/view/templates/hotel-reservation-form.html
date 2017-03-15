@@ -1,0 +1,156 @@
+<form class="login2" name="reservationManagement"
+ng-submit="reservationManagement.$valid && hotelResCtrl.insertReservation()" novalidate>
+	<div class="container well">
+		<div class="form-horizontal" >
+			<div class="row">
+				<div class="col-xs-12"><h2>Make a reservation in the best hotel in the world</h2></div>
+			</div>
+			<br/>
+			<div class="form-group">
+				<div class="row">
+					<div class="col-xs-12" align="center"><h3>Personal data</h3></div>
+				</div>
+				<label class="col-sm-2 control-label" for="formGroup">Name *</label>
+				<div class="col-sm-4">
+					<input class="form-control" type="text" ng-model="hotelResCtrl.reservation.name" ng-pattern="/^[A-ZÑ][a-zA-Zñá-ú\s]+$/" required />
+				</div>
+				<label class="col-sm-2 control-label" for="formGroup">Last name *</label>
+				<div class="col-sm-4">
+					<input class="form-control" type="text"  ng-model="hotelResCtrl.reservation.surname" ng-pattern="/^[A-ZÑ][a-zA-Zñá-ú\s]+$/" required />
+				</div>
+				<label class="col-sm-2 control-label" for="formGroup">Address 1*</label>
+				<div class="col-sm-4">
+					<input class="form-control" type="text" ng-model="hotelResCtrl.reservation.firstAddress" ng-pattern="/^[A-ZÑ][a-zA-Zñá-ú\s]+$/" required />
+				</div>
+				<label class="col-sm-2 control-label" for="formGroup">Address 2</label>
+				<div class="col-sm-4">
+					<input class="form-control" type="text" ng-model="hotelResCtrl.reservation.secondAddress" ng-pattern="/^[A-ZÑ][a-zA-Zñá-ú\s]+$/" />
+				</div>
+				<label class="col-sm-2 control-label" for="formGroup">City *</label>
+				<div class="col-sm-4">
+					<input class="form-control" type="text" ng-model="hotelResCtrl.reservation.city" required ng-pattern="/^[A-ZÑ][a-zA-Zñá-ú\s]+$/" />
+				</div>
+				<label class="col-sm-2 control-label" for="formGroup">State *</label>
+				<div class="col-sm-4">
+					<input class="form-control" type="text" ng-model="hotelResCtrl.reservation.state" required ng-pattern="/^[A-ZÑ][a-zA-Zñá-ú\s]+$/" />
+				</div>
+				<label class="col-sm-2 control-label" for="formGroup">Postal code *</label>
+				<div class="col-sm-4">
+					<input class="form-control" type="text"  ng-model="hotelResCtrl.reservation.postalCode" ng-pattern="/^[0-9]{5}$/"required />
+				</div>
+				<label class="col-sm-2 control-label" for="formGroup">Email Adress *:</label>
+				<div class="col-sm-4">
+					<input class="form-control" type="email" ng-model="hotelResCtrl.reservation.email" required />
+				</div>
+				<label class="col-sm-2 control-label" for="formGroup">Phone *:</label>
+				<div class="col-sm-4">
+					<input class="form-control" type="text"  placeholder="666111222" ng-model="hotelResCtrl.reservation.phone" ng-pattern="/^[6-9][0-9]{8}$/" required/>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="row">
+					<div class="col-xs-12" align="center"><h3>Reservation details</h3></div>
+				</div>
+				<label class="col-sm-2 control-label" for="formGroup">Check in Date *:</label>
+				<div class="col-sm-6" ng-class="{'has-error': !validCheckInDate}">
+					<p class="input-group">
+						<input type="text" class="form-control" id="checkInDate" uib-datepicker-popup="{{format}}"
+						ng-model="hotelResCtrl.reservation.checkInDate"
+						is-open="checkInDate.opened"
+						datepicker-options="dateOptions"
+						ng-required="true" close-text="Close"
+						alt-input-formats="altInputFormats"
+						ng-change="hotelResCtrl.validateDates()" readonly/>
+						<span class="input-group-btn">
+							<button type="button" class="btn btn-default" ng-click="openCheckInDate()"><i class="glyphicon glyphicon-calendar"></i></button>
+						</span>
+					</p>
+				</div>
+				<label class="col-sm-2 control-label" for="formGroup">Check in time: </label>
+				<div class="col-sm-2">
+					<select class="form-control" name="checkInTime" id="checkInTime" ng-model="hotelResCtrl.reservation.checkInTime" id="checkInTime"  ng-options="checkInT for checkInT in checkInTime" required>
+
+					</select>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label" for="formGroup">Check out Date *:</label>
+				<div class="col-sm-6">
+					<p class="input-group">
+						<input type="text" class="form-control" id="checkOutDate" uib-datepicker-popup="{{format}}"
+						ng-model="hotelResCtrl.reservation.checkOutDate"
+						is-open="checkOutDate.opened"
+						datepicker-options="dateOptions"
+						ng-required="true" close-text="Close"
+						alt-input-formats="altInputFormats"
+						ng-change="hotelResCtrl.validateDates()" readonly/>
+						<span class="input-group-btn">
+							<button type="button" class="btn btn-default" ng-click="openCheckOutDate()"><i class="glyphicon glyphicon-calendar"></i></button>
+						</span>
+					</p>
+				</div>
+				<label class="col-sm-2 control-label" for="formGroup">Check out time: </label>
+				<div class="col-sm-2">
+					<select class="form-control" name="checkOutTime" id="checkOutTime" ng-model="hotelResCtrl.reservation.checkOutTime" ng-options="checkOutT for checkOutT in checkOutTime" required>
+
+					</select>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="has-error" ng-if="!validCheckInDate || !validCheckOutDate">
+					<b>Check in date must be greater than today and Check in date must be less tha Check out date</b>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label" for="formGroup">Adults *</label>
+				<div class="col-sm-4">
+					<select class="form-control" id="numOfAdults" ng-model="hotelResCtrl.reservation.numOfAdults" ng-options="nums for nums in [5,4,3,2,1]" >
+					</select>
+				</div>
+				<label class="col-sm-2 control-label" for="formGroup">Children *</label>
+				<div class="col-sm-4">
+					<select class="form-control" id="numOfChildren" ng-model="hotelResCtrl.reservation.numOfChildren" ng-options="nums for nums in [0,1,2,3,4,5]" required>
+					</select>
+				</div>
+				<label class="col-sm-2 control-label" for="formGroup">Room preference *</label>
+				<div class="col-sm-4">
+					<input type="radio" name="roomPref" value="standard" ng-model="hotelResCtrl.reservation.roomPreference" />Standard
+					<input type="radio" name="roomPref" value="deluxe" ng-model="hotelResCtrl.reservation.roomPreference" />Deluxe
+					<input type="radio" name="roomPref" value="suite" ng-model="hotelResCtrl.reservation.roomPreference" />Suite
+				</div>
+				<label class="col-sm-2 control-label" for="formGroup">Special requests</label>
+				<div class="col-sm-4">
+					<div ng-repeat="specialRequest in specialRequests">
+						<input type="checkbox" id="specialReq{{$index}}" ng-click="hotelResCtrl.specialReqMng($index)"/>
+						<label for="">{{specialRequest}}</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label" for="formGroup">Special instructions</label>
+				<div class="col-sm-4">
+					<textarea class="form-control"  id="specialInstructions"  ></textarea>
+				</div>
+				<label class="col-sm-2 control-label" for="formGroup">Total price:</label>
+				<div class="col-sm-4" ng-if="validCheckInDate && validCheckOutDate">
+					<input class="form-control" ng-currency type="text" ng-model="hotelResCtrl.reservation.totalPrice" readonly/>
+				</div>
+			</div>
+			<br />
+			<br />
+			<div class="form-group">
+				<label class="col-sm-2 control-label" for="formGroup"></label>
+				<div class="col-sm-4">
+					<button class="btn btn-success" ng-disabled="reservationManagement.$invalid || !validCheckInDate || !validCheckOutDate">
+						Submit
+					</button>
+				</div>
+				<div class="form-group col-sm-6">
+					<label>
+						<input class="btn btn-default btn-primary btn-block" type="button" value="Back" ng-click="$parent.showAction=0;">
+					</label>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>

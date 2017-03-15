@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html ng-app="hotelbApp" xmlns="http://www.w3.org/1999/xhtml" xml:lang="es" lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Hotel 50's</title>
+  <link rel="shortcut icon" HREF="images/hotel.jpg"/>
+
+  <!-- css-->
+  <link rel="stylesheet" type="text/css" href="vendors/bootstrap/css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="css/index.css" />
+  <!-- jQuery-->
+  <script src="vendors/jquery/js/jQuery.js" type="text/javascript" xml:space="preserve"></script>
+
+  <!-- jQuery Cookies management-->
+  <script src="vendors/jquery/jquery-cookie/jquery.cookie.js" type="text/javascript" xml:space="preserve"></script>
+
+  <!-- Angular-->
+  <script src="vendors/angular/js/angular.min.js" type="text/javascript" xml:space="preserve"></script>
+  <script src="vendors/angular/js/angular-file-upload.js" type="text/javascript" xml:space="preserve"></script>
+  <script src="vendors/angular/js/angular-i18n/angular-locale_es-es.js" type="text/javascript" xml:space="preserve"></script>
+  <script src="vendors/angular/js/ng-currency.js" type="text/javascript" xml:space="preserve"></script>
+  <script src="vendors/angular/js/angular-cookies.js" type="text/javascript" xml:space="preserve"></script>
+  <script src="vendors/angular/js/dirPagination.js" type="text/javascript" xml:space="preserve"></script>
+  <script src="vendors/bootstrap/js/ui-bootstrap-tpls-2.3.1.js" type="text/javascript" xml:space="preserve"></script>
+
+  <!--  Own code-->
+  <!--  model-->
+  <script src="js/model/reservationObj.js" type="text/javascript" xml:space="preserve"></script>
+  <script src="js/model/reviewObj.js" type="text/javascript" xml:space="preserve"></script>
+  <!--  control-->
+  <script src="js/app.js" type="text/javascript" xml:space="preserve"></script>
+  <script src="js/controller/hotelReservationCtrl.js" type="text/javascript" xml:space="preserve"></script>
+  <script src="js/controller/reviewsCtrl.js" type="text/javascript" xml:space="preserve"></script>
+
+</head>
+
+<body class="container">
+  <div class="imageDiv">
+    <img src="images/hotel.jpg" id='logo' width="300" height="240" /></br>
+  </div>
+  <div id="mainMenu" class="container well" ng-controller="mainController as mainCtrl">
+    <h1>Welcome to the 50's hotel</h1>
+    <div id="mainOptions" class="form-horizontal">
+      <a href="#" ng-click="showAction=1">Room reservation</a>
+      <span>  --  </span>
+      <a href="#" ng-click="showAction=2">Hotel reviews</a>
+    </div>
+    <div id="reservation" class="form-horizontal" ng-show="showAction==1" ng-controller="hotelReservation as hotelResCtrl">
+      <hotel-reservation-form></hotel-reservation-form>
+    </div>
+    <div id="reviews" class="form-horizontal" ng-show="showAction==2" ng-controller="hotelReviewsMng as reviewsCtrl">
+      <hotel-reviews-form ng-init="reviewsCtrl.initForm()"></hotel-reviews-form>
+    </div>
+  </div>
+  <br/><br/><br/>
+  <div id="foot" class="container well">
+    <button class="btn btn-primary pull-left" onclick="location.reload()">Reload</button>
+    <strong><span> </span>-- 50's hotel: the best hotel in teh world</strong>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,82 @@
+<div class="container well">
+  <div class="row">
+    <div class="col-lg-10">
+      <div>
+        <h1>List of all reviews</h1>
+        <div class="row">
+          <div class="col-xs-4">
+            <h3>Reviews Page: {{currentPage}}</h3>
+          </div>
+          <div class="col-sm-3">
+            <label for="search">Search by mail:</label>
+            <input ng-model="mailSearch" id="search" class="form-control"
+            placeholder="Filter text" ng-disabled="reviewsManagement.$invalid">
+          </div>
+          <div class="col-sm-3">
+            <label for="search">Search by opinion:</label>
+            <input ng-model="opinionSearch" id="search" class="form-control"
+            placeholder="Filter text" ng-disabled="reviewsManagement.$invalid">
+          </div>
+          <div class="col-sm-2">
+            <label for="search">items per page:</label>
+            <input type="number" min="1" max="100" class="form-control"
+            ng-model="pageSize" ng-disabled="reviewsManagement.$invalid">
+          </div>
+        </div>
+        <br>
+        <form class="login2" name="reviewsManagement"
+        ng-submit="reviewsManagement.$valid && reviewsCtrl.sendReviews()" novalidate>
+          <div class="panel panel-default">
+            <div class="row">
+              <div class="col-sm-4">
+                <label>Rate</label>
+              </div>
+              <div class="col-sm-4">
+                <label for="search">Opinion:</label>
+              </div>
+              <div class="col-sm-4">
+                <label for="search">Email</label>
+              </div>
+            </div>
+            <div class="row" dir-paginate="review in filteredData | itemsPerPage: pageSize"
+                  current-page="currentPage">
+              <div class="col-sm-4">
+                <input type="number" class="form-control" id="rate{{$index}}"
+                min="0" max="10"
+                ng-model="review.rate" required />
+              </div>
+              <div class="col-sm-4">
+                <input type="text" class="form-control" id="opinion{{$index}}"
+                ng-model="review.opinion" required />
+              </div>
+              <div class="col-sm-4">
+                <input type="email" class="form-control"
+                ng-pattern="/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/" id="email{{$index}}"
+                ng-model="review.email" required />
+              </div>
+            </div>
+          </div>
+          <div class="text-left" boundary-links="true" ng-show="reviewsManagement.$valid">
+            <dir-pagination-controls boundary-links="true"
+            template-url="view/templates/dir-pagination-controls.html" ></dir-pagination-controls>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="formGroup"></label>
+            <div class="col-sm-4">
+              <button type="submit"
+              ng-disabled="reviewsManagement.$invalid" class="btn btn-success">
+                Submit
+              </button>
+            </div>
+            <div class="form-group col-sm-6">
+              <label>
+                <input class="btn btn-default btn-primary btn-block"
+                type="button" value="Back" ng-click="$parent.showAction=0;">
+              </label>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
