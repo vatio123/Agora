@@ -4,13 +4,15 @@ function Valoration() {
     this.nickname;
     this.idanswer;
     this.reporttext;
+    this.date;
 
     //Methods declaration
-    this.construct = function (idreport, nickname, idanswer, reporttext){
+    this.construct = function (idreport, nickname, idanswer, reporttext, date){
         this.setIdreport(idreport);
         this.setNickname(nickname);
         this.setIdanswer(idanswer);
         this.setReporttext(reporttext);
+        this.setDate(date);
     };
 
     // Getter and setter
@@ -26,6 +28,9 @@ function Valoration() {
     this.setReporttext = function (reporttext) {
         this.reporttext = reporttext;
     };
+    this.setDate = function (date) {
+        this.date = date;
+    };
 
     this.getIdreport = function () {
         return this.idreport;
@@ -38,6 +43,9 @@ function Valoration() {
     };
     this.getReporttext = function () {
         return this.reporttext;
+    };
+    this.getDate = function () {
+        return this.date;
     };
 
     /*this.arrayToString = function (arrayReviewObj)
